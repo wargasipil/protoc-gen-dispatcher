@@ -7,7 +7,7 @@
 package example
 
 import (
-	_ "github.com/wargasipil/protoc-gen-dispatcher/dispatcher/v1"
+	_ "github.com/wargasipil/protoc-gen-dispatcher/example_gen/dispatcher/v1"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
 	_ "google.golang.org/protobuf/types/descriptorpb"
@@ -122,8 +122,8 @@ const file_example_v1_example_proto_rawDesc = "" +
 	"\rHelloResponse\x12\x18\n" +
 	"\amessage\x18\x01 \x01(\tR\amessage2V\n" +
 	"\fHelloService\x12F\n" +
-	"\x05Hello\x12\x18.example.v1.HelloRequest\x1a\x19.example.v1.HelloResponse\"\b\x8a\xb5\x18\x04trueB\xa7\x01\n" +
-	"\x0ecom.example.v1B\fExampleProtoP\x01Z>github.com/wargasipil/protoc-gen-dispatcher/example/v1;example\xa2\x02\x03EXX\xaa\x02\n" +
+	"\x05Hello\x12\x18.example.v1.HelloRequest\x1a\x19.example.v1.HelloResponse\"\b\x8a\xb5\x18\x04trueB\xb3\x01\n" +
+	"\x0ecom.example.v1B\fExampleProtoP\x01ZJgithub.com/wargasipil/protoc-gen-dispatcher/example_gen/example/v1;example\xa2\x02\x03EXX\xaa\x02\n" +
 	"Example.V1\xca\x02\n" +
 	"Example\\V1\xe2\x02\x16Example\\V1\\GPBMetadata\xea\x02\vExample::V1b\x06proto3"
 

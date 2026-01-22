@@ -8,7 +8,7 @@ import (
 	connect "connectrpc.com/connect"
 	context "context"
 	errors "errors"
-	v1 "github.com/wargasipil/protoc-gen-dispatcher/example/v1"
+	v1 "github.com/wargasipil/protoc-gen-dispatcher/example_gen/example/v1"
 	http "net/http"
 	strings "strings"
 )

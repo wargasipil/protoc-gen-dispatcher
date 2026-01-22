@@ -43,8 +43,8 @@ var File_dispatcher_v1_dispatch_proto protoreflect.FileDescriptor
 const file_dispatcher_v1_dispatch_proto_rawDesc = "" +
 	"\n" +
 	"\x1cdispatcher/v1/dispatch.proto\x12\rdispatcher.v1\x1a google/protobuf/descriptor.proto:Q\n" +
-	"\x13generate_dispatcher\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\tR\x12generateDispatcherB\xbd\x01\n" +
-	"\x11com.dispatcher.v1B\rDispatchProtoP\x01ZDgithub.com/wargasipil/protoc-gen-dispatcher/dispatcher/v1;dispatcher\xa2\x02\x03DXX\xaa\x02\rDispatcher.V1\xca\x02\rDispatcher\\V1\xe2\x02\x19Dispatcher\\V1\\GPBMetadata\xea\x02\x0eDispatcher::V1b\x06proto3"
+	"\x13generate_dispatcher\x12\x1e.google.protobuf.MethodOptions\x18ц\x03 \x01(\tR\x12generateDispatcherB\xc9\x01\n" +
+	"\x11com.dispatcher.v1B\rDispatchProtoP\x01ZPgithub.com/wargasipil/protoc-gen-dispatcher/example_gen/dispatcher/v1;dispatcher\xa2\x02\x03DXX\xaa\x02\rDispatcher.V1\xca\x02\rDispatcher\\V1\xe2\x02\x19Dispatcher\\V1\\GPBMetadata\xea\x02\x0eDispatcher::V1b\x06proto3"
 
 var file_dispatcher_v1_dispatch_proto_goTypes = []any{
 	(*descriptorpb.MethodOptions)(nil), // 0: google.protobuf.MethodOptions
