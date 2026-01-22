@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package dispatcher.v1;
+
+import "google/protobuf/descriptor.proto";
+
+option go_package = "github.com/wargasipil/protoc-gen-dispatcher/dispatcher/v1;dispatcher";
+
+extend google.protobuf.MethodOptions {
+  string generate_dispatcher = 50001;
+}
