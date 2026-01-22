@@ -1,4 +1,4 @@
-package connect_dispatcher
+package dispatch_core
 
 import (
 	"context"

@@ -1,4 +1,4 @@
-package connect_dispatcher
+package dispatch_core
 
 import (
 	"context"
@@ -104,7 +104,7 @@ func NewClientDispather[Req any](procedure string, dispatcher Dispatcher, option
 
 	options = append(
 		options,
-		WithInterceptors(&sourceInterceptor{}, &telemetryInterceptor{}),
+		WithInterceptors(&telemetryInterceptor{}),
 	)
 
 	config, err := newClientConfig(

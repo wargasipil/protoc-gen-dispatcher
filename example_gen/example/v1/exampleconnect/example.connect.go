@@ -35,11 +35,15 @@ const (
 const (
 	// HelloServiceHelloProcedure is the fully-qualified name of the HelloService's Hello RPC.
 	HelloServiceHelloProcedure = "/example.v1.HelloService/Hello"
+	// HelloServiceHelloClientProcedure is the fully-qualified name of the HelloService's HelloClient
+	// RPC.
+	HelloServiceHelloClientProcedure = "/example.v1.HelloService/HelloClient"
 )
 
 // HelloServiceClient is a client for the example.v1.HelloService service.
 type HelloServiceClient interface {
 	Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error)
+	HelloClient(context.Context) *connect.BidiStreamForClient[v1.HelloClientRequest, v1.HelloClientResponse]
 }
 
 // NewHelloServiceClient constructs a client for the example.v1.HelloService service. By default, it
@@ -59,12 +63,19 @@ func NewHelloServiceClient(httpClient connect.HTTPClient, baseURL string, opts .
 			connect.WithSchema(helloServiceMethods.ByName("Hello")),
 			connect.WithClientOptions(opts...),
 		),
+		helloClient: connect.NewClient[v1.HelloClientRequest, v1.HelloClientResponse](
+			httpClient,
+			baseURL+HelloServiceHelloClientProcedure,
+			connect.WithSchema(helloServiceMethods.ByName("HelloClient")),
+			connect.WithClientOptions(opts...),
+		),
 	}
 }
 
 // helloServiceClient implements HelloServiceClient.
 type helloServiceClient struct {
-	hello *connect.Client[v1.HelloRequest, v1.HelloResponse]
+	hello       *connect.Client[v1.HelloRequest, v1.HelloResponse]
+	helloClient *connect.Client[v1.HelloClientRequest, v1.HelloClientResponse]
 }
 
 // Hello calls example.v1.HelloService.Hello.
@@ -72,9 +83,15 @@ func (c *helloServiceClient) Hello(ctx context.Context, req *connect.Request[v1.
 	return c.hello.CallUnary(ctx, req)
 }
 
+// HelloClient calls example.v1.HelloService.HelloClient.
+func (c *helloServiceClient) HelloClient(ctx context.Context) *connect.BidiStreamForClient[v1.HelloClientRequest, v1.HelloClientResponse] {
+	return c.helloClient.CallBidiStream(ctx)
+}
+
 // HelloServiceHandler is an implementation of the example.v1.HelloService service.
 type HelloServiceHandler interface {
 	Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error)
+	HelloClient(context.Context, *connect.BidiStream[v1.HelloClientRequest, v1.HelloClientResponse]) error
 }
 
 // NewHelloServiceHandler builds an HTTP handler from the service implementation. It returns the
@@ -90,10 +107,18 @@ func NewHelloServiceHandler(svc HelloServiceHandler, opts ...connect.HandlerOpti
 		connect.WithSchema(helloServiceMethods.ByName("Hello")),
 		connect.WithHandlerOptions(opts...),
 	)
+	helloServiceHelloClientHandler := connect.NewBidiStreamHandler(
+		HelloServiceHelloClientProcedure,
+		svc.HelloClient,
+		connect.WithSchema(helloServiceMethods.ByName("HelloClient")),
+		connect.WithHandlerOptions(opts...),
+	)
 	return "/example.v1.HelloService/", http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		switch r.URL.Path {
 		case HelloServiceHelloProcedure:
 			helloServiceHelloHandler.ServeHTTP(w, r)
+		case HelloServiceHelloClientProcedure:
+			helloServiceHelloClientHandler.ServeHTTP(w, r)
 		default:
 			http.NotFound(w, r)
 		}
@@ -105,4 +130,8 @@ type UnimplementedHelloServiceHandler struct{}
 
 func (UnimplementedHelloServiceHandler) Hello(context.Context, *connect.Request[v1.HelloRequest]) (*connect.Response[v1.HelloResponse], error) {
 	return nil, connect.NewError(connect.CodeUnimplemented, errors.New("example.v1.HelloService.Hello is not implemented"))
+}
+
+func (UnimplementedHelloServiceHandler) HelloClient(context.Context, *connect.BidiStream[v1.HelloClientRequest, v1.HelloClientResponse]) error {
+	return connect.NewError(connect.CodeUnimplemented, errors.New("example.v1.HelloService.HelloClient is not implemented"))
 }

@@ -8,6 +8,11 @@ plugins:
     out: example_gen
     opt:
       - paths=source_relative
+  
+  - local: protoc-gen-dispatcher
+    out: example_gen
+    opt:
+      - paths=source_relative
 
 managed:
   enabled: true

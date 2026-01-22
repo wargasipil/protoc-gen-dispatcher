@@ -1,4 +1,4 @@
-package connect_dispatcher
+package dispatch_core
 
 import (
 	"context"
@@ -65,13 +65,13 @@ func (t *telemetryInterceptor) WrapStreamingHandler(connect.StreamingHandlerFunc
 func (t *telemetryInterceptor) WrapUnary(handler connect.UnaryFunc) connect.UnaryFunc {
 	return func(ctx context.Context, ar connect.AnyRequest) (connect.AnyResponse, error) {
 		span := trace.SpanFromContext(ctx)
-		_, err := handler(ctx, ar)
+		res, err := handler(ctx, ar)
 		if err != nil {
 			span.SetStatus(codes.Error, err.Error())
 		}
 
 		otel.GetTextMapPropagator().Inject(ctx, propagation.HeaderCarrier(ar.Header()))
 
-		return handler(ctx, ar)
+		return res, err
 	}
 }

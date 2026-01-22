@@ -111,6 +111,94 @@ func (x *HelloResponse) GetMessage() string {
 	return ""
 }
 
+type HelloClientRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Name          string                 `protobuf:"bytes,1,opt,name=name,proto3" json:"name,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HelloClientRequest) Reset() {
+	*x = HelloClientRequest{}
+	mi := &file_example_v1_example_proto_msgTypes[2]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HelloClientRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HelloClientRequest) ProtoMessage() {}
+
+func (x *HelloClientRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_example_v1_example_proto_msgTypes[2]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HelloClientRequest.ProtoReflect.Descriptor instead.
+func (*HelloClientRequest) Descriptor() ([]byte, []int) {
+	return file_example_v1_example_proto_rawDescGZIP(), []int{2}
+}
+
+func (x *HelloClientRequest) GetName() string {
+	if x != nil {
+		return x.Name
+	}
+	return ""
+}
+
+type HelloClientResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Message       string                 `protobuf:"bytes,1,opt,name=message,proto3" json:"message,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *HelloClientResponse) Reset() {
+	*x = HelloClientResponse{}
+	mi := &file_example_v1_example_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *HelloClientResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*HelloClientResponse) ProtoMessage() {}
+
+func (x *HelloClientResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_example_v1_example_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use HelloClientResponse.ProtoReflect.Descriptor instead.
+func (*HelloClientResponse) Descriptor() ([]byte, []int) {
+	return file_example_v1_example_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *HelloClientResponse) GetMessage() string {
+	if x != nil {
+		return x.Message
+	}
+	return ""
+}
+
 var File_example_v1_example_proto protoreflect.FileDescriptor
 
 const file_example_v1_example_proto_rawDesc = "" +
@@ -120,9 +208,14 @@ const file_example_v1_example_proto_rawDesc = "" +
 	"\fHelloRequest\x12\x12\n" +
 	"\x04name\x18\x01 \x01(\tR\x04name\")\n" +
 	"\rHelloResponse\x12\x18\n" +
-	"\amessage\x18\x01 \x01(\tR\amessage2V\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage\"(\n" +
+	"\x12HelloClientRequest\x12\x12\n" +
+	"\x04name\x18\x01 \x01(\tR\x04name\"/\n" +
+	"\x13HelloClientResponse\x12\x18\n" +
+	"\amessage\x18\x01 \x01(\tR\amessage2\xaa\x01\n" +
 	"\fHelloService\x12F\n" +
-	"\x05Hello\x12\x18.example.v1.HelloRequest\x1a\x19.example.v1.HelloResponse\"\b\x8a\xb5\x18\x04trueB\xb3\x01\n" +
+	"\x05Hello\x12\x18.example.v1.HelloRequest\x1a\x19.example.v1.HelloResponse\"\b\x8a\xb5\x18\x04true\x12R\n" +
+	"\vHelloClient\x12\x1e.example.v1.HelloClientRequest\x1a\x1f.example.v1.HelloClientResponse(\x010\x01B\xb3\x01\n" +
 	"\x0ecom.example.v1B\fExampleProtoP\x01ZJgithub.com/wargasipil/protoc-gen-dispatcher/example_gen/example/v1;example\xa2\x02\x03EXX\xaa\x02\n" +
 	"Example.V1\xca\x02\n" +
 	"Example\\V1\xe2\x02\x16Example\\V1\\GPBMetadata\xea\x02\vExample::V1b\x06proto3"
@@ -139,16 +232,20 @@ func file_example_v1_example_proto_rawDescGZIP() []byte {
 	return file_example_v1_example_proto_rawDescData
 }
 
-var file_example_v1_example_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_example_v1_example_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_example_v1_example_proto_goTypes = []any{
-	(*HelloRequest)(nil),  // 0: example.v1.HelloRequest
-	(*HelloResponse)(nil), // 1: example.v1.HelloResponse
+	(*HelloRequest)(nil),        // 0: example.v1.HelloRequest
+	(*HelloResponse)(nil),       // 1: example.v1.HelloResponse
+	(*HelloClientRequest)(nil),  // 2: example.v1.HelloClientRequest
+	(*HelloClientResponse)(nil), // 3: example.v1.HelloClientResponse
 }
 var file_example_v1_example_proto_depIdxs = []int32{
 	0, // 0: example.v1.HelloService.Hello:input_type -> example.v1.HelloRequest
-	1, // 1: example.v1.HelloService.Hello:output_type -> example.v1.HelloResponse
-	1, // [1:2] is the sub-list for method output_type
-	0, // [0:1] is the sub-list for method input_type
+	2, // 1: example.v1.HelloService.HelloClient:input_type -> example.v1.HelloClientRequest
+	1, // 2: example.v1.HelloService.Hello:output_type -> example.v1.HelloResponse
+	3, // 3: example.v1.HelloService.HelloClient:output_type -> example.v1.HelloClientResponse
+	2, // [2:4] is the sub-list for method output_type
+	0, // [0:2] is the sub-list for method input_type
 	0, // [0:0] is the sub-list for extension type_name
 	0, // [0:0] is the sub-list for extension extendee
 	0, // [0:0] is the sub-list for field type_name
@@ -165,7 +262,7 @@ func file_example_v1_example_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_example_v1_example_proto_rawDesc), len(file_example_v1_example_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   2,
+			NumMessages:   4,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

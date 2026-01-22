@@ -8,8 +8,7 @@ if defined GOBIN (
     set TARGET_DIR=%GOBIN%
 ) else (
     REM Fallback to GOPATH/bin
-    for /f "tokens=*" %%i in ('go env GOPATH') do set GOPATH_DIR=%%i
-    set TARGET_DIR=%GOPATH_DIR%\bin
+    set TARGET_DIR=\go\bin
 )
 
 echo Target directory: %TARGET_DIR%
