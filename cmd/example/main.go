@@ -22,7 +22,7 @@ func main() {
 
 	defer client.Close()
 
-	dispatcher := dispatch_core.NewGoogleDispatcher(client, "slow-event-task", "https://localhost:8080/")
+	dispatcher := dispatch_core.NewGoogleDispatcher(client, "slow-event-task", "https://localhost:8080")
 
 	exam := example_dispatcher.NewHelloServiceDispatcher(dispatcher)
 	err = exam.Hello(ctx, &connect.Request[example.HelloRequest]{

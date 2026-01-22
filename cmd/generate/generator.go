@@ -103,7 +103,7 @@ func (g *Generator) GenerateServices() string {
 			// 	return s.hello.CallUnary(ctx, req)
 			// }
 			funcb.WriteString("func (s *" + structName + ") " + method.GetName() + "(ctx context.Context, req *connect.Request[" + inputType + "]) error {\n")
-			funcb.WriteString("\treturn s.hello.CallUnary(ctx, req)\n")
+			funcb.WriteString("\treturn s." + lowerName + ".CallUnary(ctx, req)\n")
 			funcb.WriteString("}\n\n")
 
 			// writing struct field
